@@ -5,11 +5,10 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { byCategory } from "@/lib/artworks";
+import type { Artwork } from "@/lib/artworks";
 
-const paintings = byCategory("Painting");
-
-export default function Gallery() {
+export default function Gallery({ artworks }: { artworks: Artwork[] }) {
+  const paintings = artworks;
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 

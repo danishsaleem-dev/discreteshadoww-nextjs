@@ -2,14 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { byCategory } from "@/lib/artworks";
+import type { Artwork } from "@/lib/artworks";
 import Reveal from "./Reveal";
 
-const digital = byCategory("Digital");
-const sketches = byCategory("Sketch");
-const mixed = [...digital, ...sketches];
-
-export default function DigitalArt() {
+export default function DigitalArt({
+  digital,
+  sketches,
+}: {
+  digital: Artwork[];
+  sketches: Artwork[];
+}) {
+  const mixed = [...digital, ...sketches];
   return (
     <section id="digital" className="mx-auto max-w-7xl px-6 py-28 md:py-40">
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">

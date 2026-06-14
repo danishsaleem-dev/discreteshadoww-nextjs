@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { artworks, getArtwork, getRelated } from "@/lib/artworks";
+import { getAllSlugs, getArtworkBySlug, getRelatedArtworks } from "@/lib/db";
 import ArtworkDetail from "@/components/ArtworkDetail";
 
-export function generateStaticParams() {
-  return artworks.map((a) => ({ slug: a.slug }));
+export async function generateStaticParams() {
+  const slugs = await getAllSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -13,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const art = getArtwork(slug);
+  const art = await getArtworkBySlug(slug);
   if (!art) return { title: "Artwork not found — Discrete Shadow" };
   return {
     title: `${art.title} — Discrete Shadow`,
@@ -33,8 +34,10 @@ export default async function ArtworkPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const art = getArtwork(slug);
+  const [art, related] = await Promise.all([
+    getArtworkBySlug(slug),
+    getRelatedArtworks(slug, 4),
+  ]);
   if (!art) notFound();
-  const related = getRelated(slug, 4);
   return <ArtworkDetail artwork={art} related={related} />;
 }

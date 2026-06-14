@@ -33,7 +33,11 @@ function contentType(name: string) {
   return "image/webp";
 }
 
-async function uploadFromUrl(slug: string, src: string): Promise<string | null> {
+async function uploadFromUrl(
+  slug: string,
+  src: string,
+  idx: number
+): Promise<string | null> {
   try {
     const res = await fetch(src);
     if (!res.ok) {
@@ -41,11 +45,17 @@ async function uploadFromUrl(slug: string, src: string): Promise<string | null> 
       return null;
     }
     const bytes = Buffer.from(await res.arrayBuffer());
-    const name = decodeURIComponent(src.split("/").pop() || "image.webp");
-    const objectPath = `${slug}/${name}`;
+    // Storage keys must be ASCII — name objects by index to avoid the
+    // "Invalid key" errors from Arabic/Unicode WordPress filenames.
+    const m = src.toLowerCase().match(/\.(webp|png|jpe?g)(?:\?|$)/);
+    const ext = m ? m[1].replace("jpeg", "jpg") : "webp";
+    const objectPath = `${slug}/${idx}.${ext}`;
     const { error } = await sb.storage
       .from(BUCKET)
-      .upload(objectPath, bytes, { contentType: contentType(name), upsert: true });
+      .upload(objectPath, bytes, {
+        contentType: contentType(`x.${ext}`),
+        upsert: true,
+      });
     if (error) throw error;
     return sb.storage.from(BUCKET).getPublicUrl(objectPath).data.publicUrl;
   } catch (e) {
@@ -108,8 +118,8 @@ async function main() {
       (u): u is string => !!u
     );
     const images: string[] = [];
-    for (const src of sources) {
-      const u = await uploadFromUrl(art.slug, src);
+    for (let j = 0; j < sources.length; j++) {
+      const u = await uploadFromUrl(art.slug, sources[j], j);
       if (u) images.push(u);
     }
     await insertRow(art, images, i);

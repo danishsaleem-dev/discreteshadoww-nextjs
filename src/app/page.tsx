@@ -7,17 +7,24 @@ import Calligraphy from "@/components/Calligraphy";
 import DigitalArt from "@/components/DigitalArt";
 import Commission from "@/components/Commission";
 import Footer from "@/components/Footer";
+import { getAllArtworks, filterByCategory } from "@/lib/db";
 
-export default function Home() {
+export default async function Home() {
+  const all = await getAllArtworks();
+  const paintings = filterByCategory(all, "Painting");
+  const calligraphy = filterByCategory(all, "Calligraphy");
+  const digital = filterByCategory(all, "Digital");
+  const sketches = filterByCategory(all, "Sketch");
+
   return (
     <main id="top" className="relative">
       <Navbar />
       <Hero />
       <Marquee />
       <About />
-      <Gallery />
-      <Calligraphy />
-      <DigitalArt />
+      <Gallery artworks={paintings} />
+      <Calligraphy artworks={calligraphy} />
+      <DigitalArt digital={digital} sketches={sketches} />
       <Commission />
       <Footer />
     </main>

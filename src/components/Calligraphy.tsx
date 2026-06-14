@@ -4,12 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { byCategory } from "@/lib/artworks";
+import type { Artwork } from "@/lib/artworks";
 import Reveal from "./Reveal";
 
-const pieces = byCategory("Calligraphy");
-
-export default function Calligraphy() {
+export default function Calligraphy({ artworks }: { artworks: Artwork[] }) {
+  const pieces = artworks;
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
