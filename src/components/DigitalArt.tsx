@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { byCategory } from "@/lib/artworks";
 import Reveal from "./Reveal";
 
@@ -49,9 +50,10 @@ export default function DigitalArt() {
               delay={(i % 3) * 0.06}
               className={`${spans[i % spans.length]} col-span-1`}
             >
-              <article
+              <Link
+                href={`/artwork/${art.slug}`}
                 data-cursor
-                className="group relative h-full w-full overflow-hidden rounded-sm"
+                className="group relative block h-full w-full overflow-hidden rounded-sm"
               >
                 <Image
                   src={art.src}
@@ -69,7 +71,7 @@ export default function DigitalArt() {
                     {art.title}
                   </h3>
                 </div>
-              </article>
+              </Link>
             </Reveal>
           );
         })}

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -47,25 +48,26 @@ export default function Gallery() {
     <section
       id="gallery"
       ref={sectionRef}
-      className="relative overflow-hidden py-20 md:h-screen md:py-0"
+      className="relative overflow-hidden py-20 md:flex md:h-screen md:flex-col md:py-0"
     >
-      <div className="mx-auto max-w-7xl px-6 pb-12 pt-10 md:absolute md:top-24 md:z-10">
+      <div className="mx-auto w-full max-w-7xl px-6 pb-12 pt-10 md:pb-6 md:pt-24">
         <p className="eyebrow mb-4">Selected Works</p>
         <h2 className="font-display display-lg font-light text-paper">
           The <span className="italic text-gold-bright">Paintings</span>
         </h2>
       </div>
 
-      <div className="md:flex md:h-full md:items-center">
+      <div className="md:flex md:min-h-0 md:flex-1 md:items-center md:overflow-hidden">
         <div
           ref={trackRef}
-          className="flex flex-col gap-8 md:flex-row md:gap-10 md:pl-[8vw] md:pr-[8vw] md:pt-24"
+          className="flex flex-col gap-8 md:flex-row md:gap-10 md:pl-[8vw] md:pr-[8vw]"
         >
           {paintings.map((art, i) => (
-            <article
+            <Link
               key={art.title}
+              href={`/artwork/${art.slug}`}
               data-cursor
-              className="group relative shrink-0 overflow-hidden rounded-sm md:h-[62vh] md:w-[42vh]"
+              className="group relative shrink-0 overflow-hidden rounded-sm md:h-[56vh] md:w-[42vh]"
             >
               <div className="relative aspect-[3/4] w-full md:h-full">
                 <Image
@@ -88,7 +90,7 @@ export default function Gallery() {
               <div className="absolute left-5 top-5 font-display text-5xl text-paper/20">
                 {String(i + 1).padStart(2, "0")}
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>

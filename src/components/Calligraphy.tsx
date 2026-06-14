@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { byCategory } from "@/lib/artworks";
@@ -55,9 +56,10 @@ export default function Calligraphy() {
         <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {pieces.map((art, i) => (
             <Reveal key={art.title} delay={i * 0.08}>
-              <article
+              <Link
+                href={`/artwork/${art.slug}`}
                 data-cursor
-                className="group relative aspect-[3/4] overflow-hidden rounded-sm"
+                className="group relative block aspect-[3/4] overflow-hidden rounded-sm"
               >
                 <Image
                   src={art.src}
@@ -75,7 +77,7 @@ export default function Calligraphy() {
                     {art.note}
                   </p>
                 </div>
-              </article>
+              </Link>
             </Reveal>
           ))}
         </div>
