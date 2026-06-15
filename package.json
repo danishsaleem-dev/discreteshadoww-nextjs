@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "migrate:wp": "tsx scripts/migrate-wp.ts"
+    "migrate:wp": "tsx scripts/migrate-wp.ts",
+    "patch:gallery": "tsx scripts/patch-gallery.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
