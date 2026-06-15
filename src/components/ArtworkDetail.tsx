@@ -27,6 +27,10 @@ export default function ArtworkDetail({
 }) {
   const [zoom, setZoom] = useState(false);
   const [active, setActive] = useState(0);
+  // The framed image adapts to each photo's real orientation (portrait,
+  // square or landscape) instead of being cropped into a fixed 3:4 box.
+  // Defaults to 3:4 until the active image reports its natural dimensions.
+  const [aspect, setAspect] = useState(3 / 4);
   const heroRef = useRef<HTMLDivElement>(null);
 
   const images = getImages(artwork);
@@ -127,8 +131,13 @@ export default function ArtworkDetail({
             >
               <div className="pointer-events-none absolute -inset-6 -z-10 rounded-full bg-gold/15 blur-[90px]" />
               <motion.div
-                style={{ rotateX: srx, rotateY: sry, transformStyle: "preserve-3d" }}
-                className="relative aspect-[3/4] overflow-hidden rounded-sm ring-1 ring-paper/10 shadow-2xl"
+                style={{
+                  rotateX: srx,
+                  rotateY: sry,
+                  transformStyle: "preserve-3d",
+                  aspectRatio: aspect,
+                }}
+                className="relative w-full overflow-hidden rounded-sm bg-ink-soft ring-1 ring-paper/10 shadow-2xl transition-[aspect-ratio] duration-500"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -145,6 +154,12 @@ export default function ArtworkDetail({
                       fill
                       priority
                       sizes="(max-width:1024px) 90vw, 45vw"
+                      onLoad={(e) => {
+                        const img = e.currentTarget;
+                        if (img.naturalWidth && img.naturalHeight) {
+                          setAspect(img.naturalWidth / img.naturalHeight);
+                        }
+                      }}
                       className="object-cover"
                     />
                   </motion.div>
