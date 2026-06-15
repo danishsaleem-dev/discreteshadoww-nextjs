@@ -67,14 +67,26 @@ export default function Calligraphy({ artworks }: { artworks: Artwork[] }) {
                   sizes="(max-width:640px) 100vw, 25vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink to-transparent opacity-70" />
-                <div className="absolute bottom-0 p-5">
-                  <h3 className="font-arabic text-2xl text-gold-bright" dir="rtl">
-                    {art.title.split("—")[1]?.trim() || art.title}
-                  </h3>
-                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-paper-dim">
-                    {art.note}
+
+                {/* index badge — always visible */}
+                <div className="absolute left-4 top-4 font-display text-4xl text-paper/20">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+
+                {/* gradient + text — reveal on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute bottom-0 left-0 w-full translate-y-3 p-6 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                  <p className="text-xs uppercase tracking-[0.25em] text-gold-bright">
+                    {art.note || art.category}
                   </p>
+                  <h3 className="mt-2 font-display text-2xl text-paper">
+                    {art.title.split("—")[0].trim()}
+                  </h3>
+                  {art.title.includes("—") && (
+                    <p className="mt-1 font-arabic text-lg text-gold-bright/80" dir="rtl">
+                      {art.title.split("—")[1]?.trim()}
+                    </p>
+                  )}
                 </div>
               </Link>
             </Reveal>
