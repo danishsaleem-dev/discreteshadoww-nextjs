@@ -1,67 +1,255 @@
 /**
- * Seed reviews — shown in the marquee alongside the 5 most-recent live ones
- * from Google Places API.
- *
- * HOW TO ADD MORE:
- *   1. Go to your Google Business Profile → Reviews
- *   2. Copy each reviewer's name, star rating, and review text
- *   3. Paste as a new object below (avatar is optional — only live API reviews have it)
- *   4. Push to GitHub — Vercel auto-deploys, no other steps needed
- *
- * Live API reviews (fetched once per day, cached on Vercel) are merged in
- * automatically and always shown first. Duplicates are filtered by name.
+ * All 36 real Google reviews migrated from WordPress.
+ * Avatars are stored locally in public/reviewers/ — no external hosting dependency.
+ * The 5 most-recent live Google API reviews (cached 24 h on Vercel) are merged in
+ * automatically by Testimonials.tsx and always appear first with real-time photos.
  */
 
 import { type Testimonial } from "@/lib/testimonials";
 
 export const seedReviews: Testimonial[] = [
   {
-    name: "Chim chim",
+    name: "Awais Anwar",
     rating: 5,
     source: "Google",
-    avatar:
-      "https://lh3.googleusercontent.com/a/ACg8ocLEzpTJihutRO5KbmeB-iypnvyUVrjE2oS3qA06GbND_IhR=s128-c0x00000000-cc-rp-mo",
-    text: "I have placed an order from here, can say that I have never been this satisfied with any painting like this. Super neat and aesthetic was what I was looking and they didn't disappoint. My budget wasn't alot but they managed to create such a beautiful piece within the budget that I had to offer. Will order once again in future, hoping they grow their business and get recognition as they deserve. Loved it!",
+    avatar: "/reviewers/reviewer-1.png",
+    text: "His skills shows deep understanding of art. His exceptional calligraphy skills amazed me. A best profile for painting, sketching and calligraphy. The color themes used in his work are amazing, deep and meaningful.",
   },
   {
-    name: "Aman Arshad",
+    name: "Shazia Zafar",
     rating: 5,
     source: "Google",
-    avatar:
-      "https://lh3.googleusercontent.com/a/ACg8ocICowJz0eYcvj3C3MhRaGuMSq-TlCzvaui9elel5eK85hSGKQ=s128-c0x00000000-cc-rp-mo",
-    text: "The artwork on this profile is absolutely stunning! Their paintings are lovely and neat, with a level of detail that's truly impressive. The calligraphy is equally stunning - so neat and beautiful! I'm also a fan of digital art, and this artist's digital pieces are fantastic. Overall, their talent and skill shine through in every aspect of their work.",
+    avatar: "/reviewers/reviewer-2.png",
+    text: "The best website i have ever seen",
   },
   {
-    name: "MAsood Umer",
+    name: "Baseer Ahmad",
     rating: 5,
     source: "Google",
-    avatar:
-      "https://lh3.googleusercontent.com/a-/ALV-UjW-GIdIkb_7Z4t4Gv3CQuilu12BC8AKAyRITvF6vorazuy9WteJgA=s128-c0x00000000-cc-rp-mo",
-    text: "The artwork is truly remarkable! The attention to detail, neatness, and impeccable finishing make it a standout piece. It's clear that a lot of skill and care went into its creation. I couldn't be more impressed and highly recommend it to anyone looking for exceptional art.",
+    avatar: "/reviewers/reviewer-3.png",
+    text: "Really wonderful work. Keep it up.",
+  },
+  {
+    name: "Azhar",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-4.png",
+    text: "Super 👍",
+  },
+  {
+    name: "Aneeq Ahmad",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-5.png",
+    text: "One of the most creative and inspired artist",
   },
   {
     name: "Hàmmád Ahmâd",
     rating: 5,
     source: "Google",
-    avatar:
-      "https://lh3.googleusercontent.com/a/ACg8ocK_WM2z04zTJuTPIHxUWQGt4B34nnZOKj6fUvrdCfxpKYrk-A=s128-c0x00000000-cc-rp-mo",
+    avatar: "https://lh3.googleusercontent.com/a/ACg8ocK_WM2z04zTJuTPIHxUWQGt4B34nnZOKj6fUvrdCfxpKYrk-A=s128-c0x00000000-cc-rp-mo",
     text: "Your sketches are breathtaking and captivating! Your attention to detail, mastery of light and shadow and ability to evoke emotion are truly impressive. Your art is a reflection of your soul, and it's beautiful. Keep creating, as the world needs more beauty like this. You are an inspiration to fellow artists and I look forward to seeing your next masterpiece!",
   },
   {
     name: "Hasin Khan",
     rating: 5,
     source: "Google",
-    avatar:
-      "https://lh3.googleusercontent.com/a-/ALV-UjX4TOrEQiWNF9uKIU0unhE8GmRf_IXuxeS2qRsHlNM0dZGvzLJr=s128-c0x00000000-cc-rp-mo-ba2",
+    avatar: "https://lh3.googleusercontent.com/a-/ALV-UjX4TOrEQiWNF9uKIU0unhE8GmRf_IXuxeS2qRsHlNM0dZGvzLJr=s128-c0x00000000-cc-rp-mo-ba2",
     text: "I saw this guy's paintings and other artworks on Instagram. I asked him to create a painting for my room and a digital art for my BRAND. To me explaining the concept was a bit challenging but he understood the assignment and gave me his best work. Keep it up...... If you need something, talk to him and it'll be worth every penny.",
   },
-
-  // ── Paste the rest of your ~45 reviews below ──────────────────────────────
-  // Format:
-  // {
-  //   name: "Reviewer Name",
-  //   rating: 5,
-  //   source: "Google",
-  //   text: "Their review text...",
-  // },
+  {
+    name: "Mahnoor Malik",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-8.png",
+    text: "Amazing artworks, full of creativity and great detail. I highly recommend his work to anyone who loves art.",
+  },
+  {
+    name: "Laiqa Sheikh",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-9.png",
+    text: "Yesterday I received my parcel it was amazing 🤩",
+  },
+  {
+    name: "Nimra Javed",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-10.png",
+    text: "I recently received a great piece of artwork, and I couldn't be more pleased with the creativity. I would absolutely recommend this artist to anyone looking for artwork.",
+  },
+  {
+    name: "Hamza bilal khan",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-11.png",
+    text: "Highly Recommended!",
+  },
+  {
+    name: "Bilal Saqib",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-12.png",
+    text: "Really nice work. Really recommend it to anyone who want to buy affordable decorative artworks.",
+  },
+  {
+    name: "Rubab Zakir Hussain",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-13.png",
+    text: "A great work done by discrete shadow!",
+  },
+  {
+    name: "Umaima Sameen",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-14.png",
+    text: "Wow, amazing art style. I like your paintings so much. Thank you!",
+  },
+  {
+    name: "Nightin Gale",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-15.png",
+    text: "Really impresive artwork. I am speechless and can't even explain the beauty that lies in your masterpieces. Highly recommended!",
+  },
+  {
+    name: "MAsood Umer",
+    rating: 5,
+    source: "Google",
+    avatar: "https://lh3.googleusercontent.com/a-/ALV-UjW-GIdIkb_7Z4t4Gv3CQuilu12BC8AKAyRITvF6vorazuy9WteJgA=s128-c0x00000000-cc-rp-mo",
+    text: "The artwork is truly remarkable! The attention to detail, neatness, and impeccable finishing make it a standout piece. It's clear that a lot of skill and care went into its creation. I couldn't be more impressed and highly recommend it to anyone looking for exceptional art.",
+  },
+  {
+    name: "Park Jimin",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-17.png",
+    text: "Wonderful artist! His ability to capture emotions is truly remarkable almost making it feel like adding emotions to art, very great job!!",
+  },
+  {
+    name: "Farhan Ahmad",
+    rating: 5,
+    source: "Google",
+    text: "I asked him to make this sketch for me, and he absolutely delivered. I was astonished when I saw it in my hands; it was an amazing sketch, exactly as I had imagined. He is an incredible artist with remarkable talent. He's also my friend, but I'm not giving him a review just because of our friendship. I'm giving him a 5-star review based on his outstanding talent and the effort he put into his artwork.",
+  },
+  {
+    name: "Aman Arshad",
+    rating: 5,
+    source: "Google",
+    avatar: "https://lh3.googleusercontent.com/a/ACg8ocICowJz0eYcvj3C3MhRaGuMSq-TlCzvaui9elel5eK85hSGKQ=s128-c0x00000000-cc-rp-mo",
+    text: "The artwork on this profile is absolutely stunning! Their paintings are lovely and neat, with a level of detail that's truly impressive. The calligraphy is equally stunning - so neat and beautiful! I'm also a fan of digital art, and this artist's digital pieces are fantastic. Overall, their talent and skill shine through in every aspect of their work.",
+  },
+  {
+    name: "Chim chim",
+    rating: 5,
+    source: "Google",
+    avatar: "https://lh3.googleusercontent.com/a/ACg8ocLEzpTJihutRO5KbmeB-iypnvyUVrjE2oS3qA06GbND_IhR=s128-c0x00000000-cc-rp-mo",
+    text: "I have placed an order from here, can say that I have never been this satisfied with any painting like this. Super neat and aesthetic was what I was looking and they didn't disappoint. My budget wasn't alot but they managed to create such a beautiful piece within the budget that I had to offer. Will order once again in future, hoping they grow their business and get recognition as they deserve. Loved it!",
+  },
+  {
+    name: "Salman Saeed",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-21.png",
+    text: "Amazing... Superb..... Have so Much Talent... Keep it up..... MashaAllah have amazing Talent in Calligraphy and sketching........",
+  },
+  {
+    name: "Asad Ullah",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-22.png",
+    text: "Great experience. His art skills is awesome. Totally recommended for beautiful art pieces. 🥰🥰",
+  },
+  {
+    name: "Hoor Nayeem",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-23.png",
+    text: "The art showcased on this profile are truly captivating. Each piece is a testament to exceptional talent and creativity, blending vibrant colors with intricate details. This profile is a must-visit for anyone who appreciates the beauty of art and the elegance of calligraphy.",
+  },
+  {
+    name: "Muhammad Aleem Subhani",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-24.png",
+    text: "Your artwork is captivating and deeply resonant, seamlessly connecting with the emotions it seeks to portray. It beautifully reflects motion and feeling, leaving a lasting impact. Keep it up 👍",
+  },
+  {
+    name: "Nimra Qureshi",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-25.png",
+    text: "All his artworks are great. He did a glow art for me and i loved it. I really recommend this to everyone.",
+  },
+  {
+    name: "Shifa Shoaib",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-26.png",
+    text: "Eye catching art neatly presented on the website with all detailing such amazingly created art pieces ✨",
+  },
+  {
+    name: "Ayesha WaheedCh",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-27.png",
+    text: "Talented and Trustworthy! Enjoyed working experience.",
+  },
+  {
+    name: "Anamta Ismail",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-28.png",
+    text: "Absolutely stunning work! Your talent is undeniable, the attention to detail are truly breathtaking. Would love to order more of your creations.",
+  },
+  {
+    name: "Muhammad Talha",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-29.png",
+    text: "I am very happy to see this amazing painting you have a great skills of art. I really appreciate your good work. I recommended this site to my good friends who interested in painting & drawings.",
+  },
+  {
+    name: "Hafiz Shahzaman",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-30.png",
+    text: "What an Artist! Just Perfect",
+  },
+  {
+    name: "Ashfaq Shafiq",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-31.png",
+    text: "Excellent. Boht e Acha kam he. Really good work.",
+  },
+  {
+    name: "Azeem Iqbal",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-32.png",
+    text: "Masha Allah good to see your art work it's very fantastic 😍 I really appreciate your work keep it up you doing very well 👍",
+  },
+  {
+    name: "Badar Mahmood",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-33.png",
+    text: "Super Work. Love It.",
+  },
+  {
+    name: "Ahmed Naeem Sheikh",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-34.png",
+    text: "Discrete Shadow is an exceptional art company with incredible attention to detail and creativity! Their unique designs and professional approach made the entire experience unforgettable. Highly recommended!",
+  },
+  {
+    name: "Anoosha Khalid",
+    rating: 5,
+    source: "Google",
+    avatar: "/reviewers/reviewer-35.png",
+    text: "This art collection is stunning, each piece showcases incredible skill and creativity, blending vibrant colors with elegant details. A must-see for art and calligraphy lovers!",
+  },
 ];
