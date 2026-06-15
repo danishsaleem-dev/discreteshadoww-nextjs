@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       },
       { protocol: "https", hostname: "discreteshadoww.com" },
       { protocol: "https", hostname: "pink-lyrebird-874938.hostingersite.com" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
     ],
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year

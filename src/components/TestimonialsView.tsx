@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
 import { type Testimonial } from "@/lib/testimonials";
 import Reveal from "./Reveal";
 
@@ -30,9 +30,19 @@ function Card({ t }: { t: Testimonial }) {
         &ldquo;{t.text}&rdquo;
       </blockquote>
       <figcaption className="mt-5 flex items-center gap-3">
-        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold/15 font-display text-sm text-gold-bright">
-          {t.name.charAt(0)}
-        </span>
+        {t.avatar ? (
+          <Image
+            src={t.avatar}
+            alt={t.name}
+            width={36}
+            height={36}
+            className="h-9 w-9 rounded-full object-cover"
+          />
+        ) : (
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold/15 font-display text-sm text-gold-bright">
+            {t.name.charAt(0)}
+          </span>
+        )}
         <span className="font-display text-lg text-paper">{t.name}</span>
       </figcaption>
     </figure>
@@ -43,21 +53,16 @@ function Row({
   items,
   dir,
   dur,
-  paused,
 }: {
   items: Testimonial[];
   dir: "left" | "right";
   dur: number;
-  paused: boolean;
 }) {
   return (
     <div className="flex w-max gap-5">
       <div
         className="flex w-max gap-5"
-        style={{
-          animation: `hscroll-${dir} ${dur}s linear infinite`,
-          animationPlayState: paused ? "paused" : "running",
-        }}
+        style={{ animation: `hscroll-${dir} ${dur}s linear infinite` }}
       >
         {[...items, ...items].map((t, i) => (
           <Card key={`${t.name}-${i}`} t={t} />
@@ -78,8 +83,6 @@ export default function TestimonialsView({
   total: number | null;
   url: string;
 }) {
-  const [paused, setPaused] = useState(false);
-
   if (items.length === 0) return null;
 
   const half = Math.ceil(items.length / 2);
@@ -123,13 +126,9 @@ export default function TestimonialsView({
       </div>
 
       {/* marquee rows */}
-      <div
-        className="relative flex flex-col gap-5"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        <Row items={rowA} dir="left" dur={46} paused={paused} />
-        <Row items={rowB} dir="right" dur={54} paused={paused} />
+      <div className="relative flex flex-col gap-5">
+        <Row items={rowA} dir="left" dur={46} />
+        <Row items={rowB} dir="right" dur={54} />
 
         {/* edge fades */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-ink to-transparent md:w-40" />

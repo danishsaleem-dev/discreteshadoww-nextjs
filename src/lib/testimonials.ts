@@ -4,6 +4,7 @@ export type Testimonial = {
   rating: number; // 1–5
   source?: string; // e.g. "Google"
   location?: string;
+  avatar?: string; // profile photo URL (Google)
 };
 
 // Link to your Google reviews (Business Profile / Maps). Update with the real URL.

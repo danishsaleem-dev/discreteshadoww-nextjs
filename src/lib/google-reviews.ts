@@ -12,7 +12,7 @@ type NewPlaceReview = {
   rating?: number;
   text?: { text?: string };
   originalText?: { text?: string };
-  authorAttribution?: { displayName?: string };
+  authorAttribution?: { displayName?: string; photoUri?: string };
 };
 
 /**
@@ -53,6 +53,7 @@ export async function getGoogleReviews(): Promise<GoogleReviewData | null> {
         text: (r.text?.text ?? r.originalText?.text ?? "").trim(),
         rating: Math.round(r.rating ?? 5),
         source: "Google" as const,
+        avatar: r.authorAttribution?.photoUri,
       }))
       .filter((r) => r.text.length > 0);
 
