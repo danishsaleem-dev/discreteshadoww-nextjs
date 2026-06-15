@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import type { Artwork } from "@/lib/artworks";
+import { useDragScroll } from "@/hooks/useDragScroll";
 
 function Card({
   art,
@@ -55,78 +56,12 @@ function Card({
  */
 export default function MobileArtSlider({ artworks }: { artworks: Artwork[] }) {
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const mql = window.matchMedia("(max-width: 767px)");
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    let raf = 0;
-    let paused = false;
-    let resumeTimer: ReturnType<typeof setTimeout> | undefined;
-    const speed = 0.4; // px per frame (~24px/s at 60fps)
-
-    const tick = () => {
-      const half = el.scrollWidth / 2;
-      if (half > 0) {
-        if (!paused && !reduce.matches) el.scrollLeft += speed;
-        // Seamless wrap (works during user swipes too)
-        if (el.scrollLeft >= half) el.scrollLeft -= half;
-        else if (el.scrollLeft <= 0) el.scrollLeft += half;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-
-    const pause = () => {
-      paused = true;
-      if (resumeTimer) clearTimeout(resumeTimer);
-    };
-    const resume = () => {
-      if (resumeTimer) clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => (paused = false), 1800);
-    };
-
-    const start = () => {
-      if (raf) return;
-      el.addEventListener("pointerdown", pause);
-      el.addEventListener("pointerup", resume);
-      el.addEventListener("pointercancel", resume);
-      el.addEventListener("touchstart", pause, { passive: true });
-      el.addEventListener("touchend", resume, { passive: true });
-      el.addEventListener("mouseenter", pause);
-      el.addEventListener("mouseleave", resume);
-      raf = requestAnimationFrame(tick);
-    };
-    const stop = () => {
-      if (!raf) return;
-      cancelAnimationFrame(raf);
-      raf = 0;
-      if (resumeTimer) clearTimeout(resumeTimer);
-      el.removeEventListener("pointerdown", pause);
-      el.removeEventListener("pointerup", resume);
-      el.removeEventListener("pointercancel", resume);
-      el.removeEventListener("touchstart", pause);
-      el.removeEventListener("touchend", resume);
-      el.removeEventListener("mouseenter", pause);
-      el.removeEventListener("mouseleave", resume);
-    };
-
-    const sync = () => (mql.matches ? start() : stop());
-    sync();
-    mql.addEventListener("change", sync);
-
-    return () => {
-      stop();
-      mql.removeEventListener("change", sync);
-    };
-  }, []);
+  useDragScroll(ref, { dir: "left", speed: 0.4 });
 
   return (
     <div
       ref={ref}
-      className="no-scrollbar flex gap-4 overflow-x-auto px-6 pb-1"
+      className="no-scrollbar flex cursor-grab select-none gap-4 overflow-x-auto px-6 pb-1 active:cursor-grabbing"
       style={{ scrollbarWidth: "none" }}
     >
       {artworks.map((art, i) => (

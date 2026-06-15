@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
@@ -29,7 +30,9 @@ export default async function Home() {
       <Gallery artworks={paintings} />
       <Calligraphy artworks={calligraphy} />
       <DigitalArt digital={digital} sketches={sketches} />
-      <Testimonials />
+      <Suspense fallback={null}>
+        <Testimonials />
+      </Suspense>
       <Commission />
       <Footer />
     </main>

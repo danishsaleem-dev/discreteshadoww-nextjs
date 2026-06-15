@@ -1,7 +1,9 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import { type Testimonial } from "@/lib/testimonials";
+import { useDragScroll } from "@/hooks/useDragScroll";
 import Reveal from "./Reveal";
 
 function Stars({ n }: { n: number }) {
@@ -17,57 +19,57 @@ function Stars({ n }: { n: number }) {
 
 function Card({ t }: { t: Testimonial }) {
   return (
-    <figure className="flex w-[300px] shrink-0 flex-col rounded-sm border border-paper/10 bg-ink-soft/50 p-7 sm:w-[380px]">
+    <figure className="flex w-[250px] shrink-0 flex-col rounded-sm border border-paper/10 bg-ink-soft/50 p-5 sm:w-[360px] sm:p-7">
       <div className="flex items-center justify-between">
         <Stars n={t.rating} />
         {t.source && (
-          <span className="text-[0.6rem] uppercase tracking-[0.2em] text-paper-dim">
+          <span className="text-[0.55rem] uppercase tracking-[0.2em] text-paper-dim sm:text-[0.6rem]">
             {t.source}
           </span>
         )}
       </div>
-      <blockquote className="mt-4 flex-1 leading-relaxed text-paper-dim">
+      <blockquote className="mt-3 line-clamp-6 flex-1 text-sm leading-relaxed text-paper-dim sm:mt-4 sm:text-base">
         &ldquo;{t.text}&rdquo;
       </blockquote>
-      <figcaption className="mt-5 flex items-center gap-3">
+      <figcaption className="mt-4 flex items-center gap-3 sm:mt-5">
         {t.avatar ? (
           <Image
             src={t.avatar}
             alt={t.name}
-            width={36}
-            height={36}
-            className="h-9 w-9 rounded-full object-cover"
+            width={40}
+            height={40}
+            draggable={false}
+            className="h-8 w-8 rounded-full object-cover sm:h-9 sm:w-9"
           />
         ) : (
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold/15 font-display text-sm text-gold-bright">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gold/15 font-display text-sm text-gold-bright sm:h-9 sm:w-9">
             {t.name.charAt(0)}
           </span>
         )}
-        <span className="font-display text-lg text-paper">{t.name}</span>
+        <span className="font-display text-base text-paper sm:text-lg">
+          {t.name}
+        </span>
       </figcaption>
     </figure>
   );
 }
 
-function Row({
-  items,
-  dir,
-  dur,
-}: {
-  items: Testimonial[];
-  dir: "left" | "right";
-  dur: number;
-}) {
+function Row({ items, dir }: { items: Testimonial[]; dir: "left" | "right" }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useDragScroll(ref, { dir, speed: 0.4 });
   return (
-    <div className="flex w-max gap-5">
-      <div
-        className="flex w-max gap-5"
-        style={{ animation: `hscroll-${dir} ${dur}s linear infinite` }}
-      >
-        {[...items, ...items].map((t, i) => (
-          <Card key={`${t.name}-${i}`} t={t} />
-        ))}
-      </div>
+    <div
+      ref={ref}
+      className="no-scrollbar flex cursor-grab select-none gap-5 overflow-x-auto active:cursor-grabbing"
+      style={{ scrollbarWidth: "none" }}
+    >
+      {/* rendered twice for a seamless loop */}
+      {items.map((t, i) => (
+        <Card key={`${t.name}-${i}`} t={t} />
+      ))}
+      {items.map((t, i) => (
+        <Card key={`dup-${t.name}-${i}`} t={t} />
+      ))}
     </div>
   );
 }
@@ -125,10 +127,10 @@ export default function TestimonialsView({
         </Reveal>
       </div>
 
-      {/* marquee rows */}
+      {/* marquee rows — auto-scroll, draggable (hold to pause) */}
       <div className="relative flex flex-col gap-5">
-        <Row items={rowA} dir="left" dur={46} />
-        <Row items={rowB} dir="right" dur={54} />
+        <Row items={rowA} dir="left" />
+        <Row items={rowB} dir="right" />
 
         {/* edge fades */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-ink to-transparent md:w-40" />
