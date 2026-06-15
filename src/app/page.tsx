@@ -5,6 +5,7 @@ import About from "@/components/About";
 import Gallery from "@/components/Gallery";
 import Calligraphy from "@/components/Calligraphy";
 import DigitalArt from "@/components/DigitalArt";
+import Testimonials from "@/components/Testimonials";
 import Commission from "@/components/Commission";
 import Footer from "@/components/Footer";
 import { getAllArtworks, filterByCategory } from "@/lib/db";
@@ -28,6 +29,7 @@ export default async function Home() {
       <Gallery artworks={paintings} />
       <Calligraphy artworks={calligraphy} />
       <DigitalArt digital={digital} sketches={sketches} />
+      <Testimonials />
       <Commission />
       <Footer />
     </main>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -51,8 +52,21 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6">
-        <Link href="/" className="font-display text-xl tracking-wide text-paper">
-          Discrete<span className="text-gold-bright">.</span>Shadow
+        <Link
+          href="/"
+          aria-label="Discrete Shadow — home"
+          className="inline-flex items-center"
+        >
+          <span className="inline-flex items-center rounded-lg bg-white px-2.5 py-1.5 shadow-sm ring-1 ring-black/5">
+            <Image
+              src="/logo.webp"
+              alt="Discrete Shadow"
+              width={800}
+              height={720}
+              priority
+              className="h-8 w-auto md:h-9"
+            />
+          </span>
         </Link>
 
         <ul className="hidden items-center gap-7 lg:flex">

@@ -12,7 +12,9 @@ export default function DigitalArt({
   digital: Artwork[];
   sketches: Artwork[];
 }) {
-  const mixed = [...digital, ...sketches];
+  // Preview only — 3 digital + 3 sketches fills the 6-tile mosaic; the rest
+  // live on the dedicated pages behind the "View all" buttons.
+  const mixed = [...digital.slice(0, 3), ...sketches.slice(0, 3)];
   return (
     <section id="digital" className="mx-auto max-w-7xl px-6 py-28 md:py-40">
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -78,6 +80,27 @@ export default function DigitalArt({
             </Reveal>
           );
         })}
+      </div>
+
+      <div className="mt-14 flex flex-wrap justify-center gap-4">
+        <Link
+          href="/digital-art"
+          className="group inline-flex items-center gap-3 rounded-full border border-paper/20 px-7 py-3.5 text-xs uppercase tracking-[0.2em] text-paper transition-colors hover:border-gold hover:text-gold-bright"
+        >
+          View all digital art
+          <span className="transition-transform duration-300 group-hover:translate-x-1">
+            →
+          </span>
+        </Link>
+        <Link
+          href="/sketches"
+          className="group inline-flex items-center gap-3 rounded-full border border-paper/20 px-7 py-3.5 text-xs uppercase tracking-[0.2em] text-paper transition-colors hover:border-gold hover:text-gold-bright"
+        >
+          View all sketches
+          <span className="transition-transform duration-300 group-hover:translate-x-1">
+            →
+          </span>
+        </Link>
       </div>
     </section>
   );

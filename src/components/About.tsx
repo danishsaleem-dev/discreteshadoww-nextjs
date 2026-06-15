@@ -1,12 +1,14 @@
 "use client";
 
-import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Reveal from "./Reveal";
 
 export default function About() {
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [load, setLoad] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -14,21 +16,45 @@ export default function About() {
   const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
   const imgY = useTransform(scrollYProgress, [0, 1], ["12%", "-12%"]);
 
+  // Lazy-load the 13MB clip: only fetch/play once it's near the viewport,
+  // pause when it scrolls away. Keeps the homepage load fast.
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoad(true);
+          el.play?.().catch(() => {});
+        } else {
+          el.pause?.();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section id="about" className="relative mx-auto max-w-7xl px-6 py-28 md:py-40">
       <div className="grid items-center gap-14 md:grid-cols-2 md:gap-20">
         <div ref={ref} className="relative">
           <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
             <motion.div style={{ y: imgY }} className="absolute inset-[-12%]">
-              <Image
-                src="/artwork/Portrait-Glow.webp"
-                alt="Portrait Glow"
-                fill
-                sizes="(max-width:768px) 100vw, 45vw"
-                className="object-cover"
-              />
+              <video
+                ref={videoRef}
+                poster="/artwork/Heavy-Textured-Calligraphy.webp"
+                muted
+                loop
+                playsInline
+                preload="none"
+                className="h-full w-full object-cover"
+              >
+                {load && <source src="/about-calligraphy.mp4" type="video/mp4" />}
+              </video>
             </motion.div>
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent" />
           </div>
           <motion.div
             style={{ y }}

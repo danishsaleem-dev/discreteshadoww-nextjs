@@ -49,11 +49,22 @@ export default function Gallery({ artworks }: { artworks: Artwork[] }) {
       ref={sectionRef}
       className="relative overflow-hidden py-20 md:flex md:h-screen md:flex-col md:py-0"
     >
-      <div className="mx-auto w-full max-w-7xl px-6 pb-12 pt-10 md:pb-6 md:pt-24">
-        <p className="eyebrow mb-4">Selected Works</p>
-        <h2 className="font-display display-lg font-light text-paper">
-          The <span className="italic text-gold-bright">Paintings</span>
-        </h2>
+      <div className="mx-auto flex w-full max-w-7xl flex-wrap items-end justify-between gap-4 px-6 pb-12 pt-10 md:pb-6 md:pt-24">
+        <div>
+          <p className="eyebrow mb-4">Selected Works</p>
+          <h2 className="font-display display-lg font-light text-paper">
+            The <span className="italic text-gold-bright">Paintings</span>
+          </h2>
+        </div>
+        <Link
+          href="/paintings"
+          className="group inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-paper-dim transition-colors hover:text-gold-bright"
+        >
+          View all paintings
+          <span className="transition-transform duration-300 group-hover:translate-x-1">
+            →
+          </span>
+        </Link>
       </div>
 
       <div className="md:flex md:min-h-0 md:flex-1 md:items-center md:overflow-hidden">

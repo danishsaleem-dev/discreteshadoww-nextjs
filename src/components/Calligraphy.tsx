@@ -8,7 +8,7 @@ import type { Artwork } from "@/lib/artworks";
 import Reveal from "./Reveal";
 
 export default function Calligraphy({ artworks }: { artworks: Artwork[] }) {
-  const pieces = artworks;
+  const pieces = artworks.slice(0, 8);
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -91,6 +91,18 @@ export default function Calligraphy({ artworks }: { artworks: Artwork[] }) {
               </Link>
             </Reveal>
           ))}
+        </div>
+
+        <div className="mt-14 flex justify-center">
+          <Link
+            href="/calligraphy"
+            className="group inline-flex items-center gap-3 rounded-full border border-paper/20 px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-paper transition-colors hover:border-gold hover:text-gold-bright"
+          >
+            View all calligraphy
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
         </div>
       </div>
     </section>
