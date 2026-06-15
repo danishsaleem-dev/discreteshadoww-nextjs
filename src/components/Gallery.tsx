@@ -75,6 +75,7 @@ export default function Gallery({ artworks }: { artworks: Artwork[] }) {
                   fill
                   sizes="(max-width:768px) 100vw, 42vh"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  loading={i === 0 ? "eager" : "lazy"}
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent opacity-80" />

@@ -1,0 +1,14 @@
+{
+  "name": "Discrete Shadow",
+  "short_name": "Discrete Shadow",
+  "description": "Custom art commissions — paintings, Arabic calligraphy, digital portraits.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0908",
+  "theme_color": "#0a0908",
+  "icons": [
+    { "src": "/ds-logo-300.webp", "sizes": "192x192", "type": "image/webp" },
+    { "src": "/ds-logo-1024.webp", "sizes": "512x512", "type": "image/webp" },
+    { "src": "/apple-icon.png",    "sizes": "180x180", "type": "image/png"  }
+  ]
+}

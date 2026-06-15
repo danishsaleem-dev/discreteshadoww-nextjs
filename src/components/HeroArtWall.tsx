@@ -35,6 +35,9 @@ export default function HeroArtWall() {
                     fill
                     sizes="(max-width:768px) 50vw, 28vw"
                     className="object-cover"
+                    // Eagerly load only the first visible tile in each row to improve LCP
+                    loading={i < 2 ? "eager" : "lazy"}
+                    priority={i < 2}
                   />
                 </div>
               ))}

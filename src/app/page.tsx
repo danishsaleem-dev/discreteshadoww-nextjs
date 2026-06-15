@@ -8,6 +8,7 @@ import DigitalArt from "@/components/DigitalArt";
 import Commission from "@/components/Commission";
 import Footer from "@/components/Footer";
 import { getAllArtworks, filterByCategory } from "@/lib/db";
+import { ArtistJsonLd, GalleryJsonLd } from "@/components/JsonLd";
 
 export default async function Home() {
   const all = await getAllArtworks();
@@ -18,6 +19,8 @@ export default async function Home() {
 
   return (
     <main id="top" className="relative">
+      <ArtistJsonLd />
+      <GalleryJsonLd />
       <Navbar />
       <Hero />
       <Marquee />
