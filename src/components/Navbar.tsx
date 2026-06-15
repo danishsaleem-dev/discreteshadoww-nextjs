@@ -57,14 +57,14 @@ export default function Navbar() {
           aria-label="Discrete Shadow — home"
           className="inline-flex items-center"
         >
-          <span className="inline-flex items-center rounded-lg bg-white px-2.5 py-1.5 shadow-sm ring-1 ring-black/5">
+          <span className="inline-flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white p-1 shadow-sm ring-1 ring-black/5 md:h-12 md:w-12">
             <Image
-              src="/logo.webp"
+              src="/ds-logo-1024.webp"
               alt="Discrete Shadow"
-              width={800}
-              height={720}
+              width={1024}
+              height={1024}
               priority
-              className="h-8 w-auto md:h-9"
+              className="h-full w-full object-contain"
             />
           </span>
         </Link>

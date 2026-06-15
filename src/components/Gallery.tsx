@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import type { Artwork } from "@/lib/artworks";
+import MobileArtSlider from "./MobileArtSlider";
 
 export default function Gallery({ artworks }: { artworks: Artwork[] }) {
   const paintings = artworks;
@@ -67,10 +68,16 @@ export default function Gallery({ artworks }: { artworks: Artwork[] }) {
         </Link>
       </div>
 
-      <div className="md:flex md:min-h-0 md:flex-1 md:items-center md:overflow-hidden">
+      {/* mobile: auto-scrolling, swipeable slider */}
+      <div className="md:hidden">
+        <MobileArtSlider artworks={paintings} />
+      </div>
+
+      {/* desktop: pinned horizontal scroll */}
+      <div className="hidden md:flex md:min-h-0 md:flex-1 md:items-center md:overflow-hidden">
         <div
           ref={trackRef}
-          className="flex flex-col gap-8 md:flex-row md:gap-10 md:pl-[8vw] md:pr-[8vw]"
+          className="flex md:flex-row md:gap-10 md:pl-[8vw] md:pr-[8vw]"
         >
           {paintings.map((art, i) => (
             <Link

@@ -13,7 +13,7 @@ const words = [
 export default function Marquee() {
   const row = [...words, ...words];
   return (
-    <section className="relative border-y border-paper/10 py-6">
+    <section className="relative overflow-hidden border-y border-paper/10 py-6">
       <div className="flex w-max animate-marquee whitespace-nowrap">
         {row.map((w, i) => (
           <span

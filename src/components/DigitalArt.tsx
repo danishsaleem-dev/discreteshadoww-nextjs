@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Artwork } from "@/lib/artworks";
 import Reveal from "./Reveal";
+import MobileArtSlider from "./MobileArtSlider";
 
 export default function DigitalArt({
   digital,
@@ -37,8 +38,13 @@ export default function DigitalArt({
         </Reveal>
       </div>
 
-      {/* asymmetric editorial grid */}
-      <div className="mt-16 grid grid-cols-2 gap-5 md:grid-cols-6 md:gap-6">
+      {/* mobile: auto-scrolling, swipeable slider */}
+      <div className="-mx-6 mt-12 md:hidden">
+        <MobileArtSlider artworks={mixed} />
+      </div>
+
+      {/* asymmetric editorial grid (desktop) */}
+      <div className="mt-16 hidden grid-cols-2 gap-5 md:grid md:grid-cols-6 md:gap-6">
         {mixed.map((art, i) => {
           // varied spans for an artistic mosaic
           const spans = [

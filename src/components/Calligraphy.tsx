@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import type { Artwork } from "@/lib/artworks";
 import Reveal from "./Reveal";
+import MobileArtSlider from "./MobileArtSlider";
 
 export default function Calligraphy({ artworks }: { artworks: Artwork[] }) {
   const pieces = artworks.slice(0, 8);
@@ -52,7 +53,12 @@ export default function Calligraphy({ artworks }: { artworks: Artwork[] }) {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* mobile: auto-scrolling, swipeable slider */}
+        <div className="-mx-6 mt-12 md:hidden">
+          <MobileArtSlider artworks={pieces} />
+        </div>
+
+        <div className="mt-16 hidden grid-cols-2 gap-6 md:grid lg:grid-cols-4">
           {pieces.map((art, i) => (
             <Reveal key={art.title} delay={i * 0.08}>
               <Link
