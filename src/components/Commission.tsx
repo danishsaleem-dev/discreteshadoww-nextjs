@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { contact } from "@/lib/artworks";
 import Reveal from "./Reveal";
 
@@ -39,13 +40,13 @@ export default function Commission() {
 
             <Reveal delay={0.15}>
               <div className="mt-10 flex flex-wrap gap-4">
-                <a
-                  href={`mailto:${contact.email}`}
+                <Link
+                  href="/commission"
                   className="group relative overflow-hidden rounded-full bg-gold px-8 py-4 text-sm uppercase tracking-[0.2em] text-ink"
                 >
                   <span className="relative z-10">Start a Commission</span>
                   <span className="absolute inset-0 translate-y-full bg-gold-bright transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0" />
-                </a>
+                </Link>
                 <a
                   href={`tel:${contact.phone.replace(/[^0-9]/g, "")}`}
                   className="rounded-full border border-paper/20 px-8 py-4 text-sm uppercase tracking-[0.2em] text-paper transition-colors hover:border-gold hover:text-gold-bright"

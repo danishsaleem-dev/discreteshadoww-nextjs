@@ -295,11 +295,11 @@ export const getRelated = (slug: string, count = 4): Artwork[] => {
 };
 
 export const socials = [
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "Behance", href: "https://behance.net" },
-  { label: "YouTube", href: "https://youtube.com" },
-  { label: "TikTok", href: "https://tiktok.com" },
-  { label: "Pinterest", href: "https://pinterest.com" },
+  { label: "Instagram", href: "https://www.instagram.com/discreteshadoww" },
+  { label: "Behance", href: "https://www.behance.net/discreteshadoww" },
+  { label: "YouTube", href: "https://www.youtube.com/@discreteshadoww" },
+  { label: "TikTok", href: "https://www.tiktok.com/@discreteshadoww" },
+  { label: "Pinterest", href: "https://uk.pinterest.com/discreteshadoww" },
 ];
 
 export const contact = {

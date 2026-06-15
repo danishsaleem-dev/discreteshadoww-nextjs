@@ -119,3 +119,28 @@ export async function getRelatedArtworks(
 export function filterByCategory(artworks: Artwork[], category: Category) {
   return artworks.filter((a) => a.category === category);
 }
+
+/**
+ * Artworks for a single category. Uses the cookie-free anon client so the
+ * calling page can be statically generated / cached (fast). Falls back to
+ * static data when Supabase isn't configured.
+ */
+export async function getArtworksByCategoryName(
+  category: Category
+): Promise<Artwork[]> {
+  if (!isSupabaseConfigured())
+    return staticArtworks.filter((a) => a.category === category);
+  try {
+    const sb = createAnonClient();
+    const { data } = await sb
+      .from("artworks")
+      .select("*")
+      .eq("category", category)
+      .order("sort_order", { ascending: true });
+    if (!data?.length)
+      return staticArtworks.filter((a) => a.category === category);
+    return (data as ArtworkRow[]).map(rowToArtwork);
+  } catch {
+    return staticArtworks.filter((a) => a.category === category);
+  }
+}

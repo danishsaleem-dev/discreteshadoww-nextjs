@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const Hero3D = dynamic(() => import("./Hero3D"), { ssr: false });
@@ -91,12 +92,12 @@ export default function Hero() {
             </span>
             <span className="absolute inset-0 -z-0 translate-y-full bg-gold transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-0" />
           </a>
-          <a
-            href="#commission"
+          <Link
+            href="/commission"
             className="text-sm uppercase tracking-[0.2em] text-paper-dim underline-offset-8 transition-colors hover:text-gold-bright hover:underline"
           >
             Commission a Piece
-          </a>
+          </Link>
         </motion.div>
       </div>
 

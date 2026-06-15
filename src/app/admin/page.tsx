@@ -32,6 +32,12 @@ export default async function AdminDashboard() {
             View site ↗
           </Link>
           <Link
+            href="/admin/commissions"
+            className="rounded-full border border-paper/20 px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-paper-dim transition-colors hover:border-gold/50 hover:text-paper"
+          >
+            Requests
+          </Link>
+          <Link
             href="/admin/new"
             className="rounded-full bg-gold px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-ink transition-colors hover:bg-gold-bright"
           >

@@ -1,6 +1,32 @@
-"use client";
-
+import Link from "next/link";
 import { socials, contact } from "@/lib/artworks";
+
+const cols = [
+  {
+    title: "Explore",
+    links: [
+      ["Paintings", "/paintings"],
+      ["Calligraphy", "/calligraphy"],
+      ["Digital Art", "/digital-art"],
+      ["Sketches", "/sketches"],
+    ],
+  },
+  {
+    title: "Studio",
+    links: [
+      ["About", "/about"],
+      ["Contact", "/contact"],
+      ["Custom Order", "/commission"],
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      ["Privacy Policy", "/privacy"],
+      ["Terms of Service", "/terms"],
+    ],
+  },
+];
 
 export default function Footer() {
   return (
@@ -31,6 +57,54 @@ export default function Footer() {
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* link columns */}
+        <div className="grid grid-cols-2 gap-8 border-t border-paper/10 py-12 sm:grid-cols-3 md:grid-cols-4">
+          {cols.map((col) => (
+            <div key={col.title}>
+              <p className="mb-4 text-xs uppercase tracking-[0.2em] text-paper-dim">
+                {col.title}
+              </p>
+              <ul className="space-y-2.5">
+                {col.links.map(([label, href]) => (
+                  <li key={href}>
+                    <Link
+                      href={href}
+                      className="text-sm text-paper transition-colors hover:text-gold-bright"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <div>
+            <p className="mb-4 text-xs uppercase tracking-[0.2em] text-paper-dim">
+              Reach out
+            </p>
+            <ul className="space-y-2.5 text-sm text-paper">
+              <li>
+                <a
+                  href={`tel:${contact.phone.replace(/[^0-9]/g, "")}`}
+                  className="transition-colors hover:text-gold-bright"
+                >
+                  {contact.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`https://wa.me/${contact.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-gold-bright"
+                >
+                  WhatsApp
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* oversized wordmark */}
