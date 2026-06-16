@@ -63,11 +63,11 @@ export default function AboutView() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
               <motion.div style={{ y: imgY }} className="absolute inset-[-10%]">
                 <Image
-                  src="/artwork/Portrait-Glow.webp"
-                  alt="Discrete Shadow — portrait artwork"
+                  src="/danish-portrait.webp"
+                  alt="Danish — artist behind Discrete Shadow"
                   fill
                   sizes="(max-width:768px) 100vw, 45vw"
-                  className="object-cover"
+                  className="object-cover object-top"
                   priority
                 />
               </motion.div>
