@@ -56,7 +56,7 @@ function Card({ t }: { t: Testimonial }) {
 
 function Row({ items, dir }: { items: Testimonial[]; dir: "left" | "right" }) {
   const ref = useRef<HTMLDivElement>(null);
-  useDragScroll(ref, { dir, speed: 0.4 });
+  useDragScroll(ref, { dir, speed: 0.6 });
   return (
     <div
       ref={ref}

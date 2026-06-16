@@ -39,6 +39,11 @@ export function useDragScroll(
     let dragging = false; // moved enough to count as a drag
     let startX = 0;
     let startScroll = 0;
+    // Float position accumulator. `scrollLeft` is rounded to an integer by the
+    // browser on read-back, so `scrollLeft += 0.4` never accumulates (it stays
+    // stuck at a blurry sub-pixel offset). We track the true position here and
+    // assign a rounded value, then re-sync from scrollLeft while the user drags.
+    let pos = 0;
 
     const wrap = () => {
       const half = el.scrollWidth / 2;
@@ -50,11 +55,22 @@ export function useDragScroll(
     // Start "right" rows in the middle so they have room to move backwards.
     requestAnimationFrame(() => {
       if (dir === "right") el.scrollLeft = el.scrollWidth / 2;
+      pos = el.scrollLeft;
     });
 
     const tick = () => {
-      if (!paused && !reduce.matches) el.scrollLeft += step;
-      wrap();
+      const half = el.scrollWidth / 2;
+      if (half > 0) {
+        if (paused || reduce.matches) {
+          // Follow any manual scroll so auto-scroll resumes from here.
+          pos = el.scrollLeft;
+        } else {
+          pos += step;
+          if (pos >= half) pos -= half;
+          else if (pos < 0) pos += half;
+          el.scrollLeft = Math.round(pos);
+        }
+      }
       raf = requestAnimationFrame(tick);
     };
 
